@@ -98,6 +98,8 @@ sub bullet2comma {
     require String::CommonPrefix;
     my $common_prefix = String::CommonPrefix::common_prefix(@lines);
 
+    $common_prefix =~ s/\w.*\z//;
+
     s/\A\Q$common_prefix// for @lines;
     join(", ", @lines) . "\n";
 }
