@@ -102,6 +102,37 @@ sub bullet2comma {
     join(", ", @lines) . "\n";
 }
 
+$SPEC{comma2bullet} = {
+    v => 1.1,
+    summary => 'Convert a comma-separated list into bullet',
+    args => {
+        %argspec0_input,
+        # XXX bullet style
+        # XXX column width
+    },
+    result_naked => 1,
+};
+sub comma2bullet {
+    require Text::Wrap;
+
+    my %args = @_;
+
+    my $res = "";
+    my @split = split /(\R(?:\s*\R+)+)/m, $args{input};
+    while (my ($para, $break) = splice @split, 0, 2) {
+        $para =~ s/\s*\R/ /g; # make para a single line
+        my @items = split /,\s*/, $para;
+        my $i = 0;
+        for my $item (@items) {
+            $res .= "- " . Text::Wrap::wrap("", "  ", $item) .
+                (++$i == @items ? "" : "\n");
+        }
+        $res .= ($break // "");
+    }
+
+    $res;
+}
+
 1;
 # ABSTRACT: Command-line utilities related to lists in files
 
