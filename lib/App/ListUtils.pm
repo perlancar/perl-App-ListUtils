@@ -119,4 +119,8 @@ This distribution provides the following command-line utilities:
 
 =head1 SEE ALSO
 
+L<List::Util>
+
+L<String::CommonPrefix>, L<String::CommonSuffix>
+
 =cut
