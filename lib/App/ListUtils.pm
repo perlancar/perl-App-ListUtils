@@ -89,6 +89,9 @@ $SPEC{bullet2comma} = {
         %argspec0_input,
     },
     result_naked => 1,
+    links => [
+        {url=>'prog:comma2bullet'},
+    ],
 };
 sub bullet2comma {
     my %args = @_;
